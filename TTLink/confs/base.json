@@ -1,19 +1,21 @@
 {
-  "log": {
-    "disabled": false,
-    "level": "debug",
-    "output": "../log/box.log",
-    "timestamp": true
-  },
-  "experimental": {
-    "cache_file": {
-      "enabled": true
+    "log": {
+        "disabled": false,
+        "level": "debug",
+        "output": "../log/box.log",
+        "timestamp": true
     },
-    "clash_api": {
-      "external_controller": "[::]:9090",
-      "external_ui": "../board",
-      "external_ui_download_url": "https://srs.acstudycn.eu.org/gh-pages.zip",
-      "external_ui_download_detour": "out-direct"
+    "experimental": {
+        "cache_file": {
+            "enabled": true,
+            "store_fakeip": true
+        },
+        "clash_api": {
+            "default_mode": "Rule",
+            "external_controller": "127.0.0.1:9090",
+            "external_ui": "../confs/board",
+            "external_ui_download_url": "https://srs.acstudycn.eu.org/gh-pages.zip",
+            "external_ui_download_detour": "out-direct"
+        }
     }
-  }
 }
