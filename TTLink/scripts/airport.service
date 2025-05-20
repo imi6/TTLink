@@ -26,13 +26,13 @@ log() {
 }
 
 airport() {
-  local air_name="rtjc"
-  local url="https://rega.eu.org/new/subscribe/feef16ee8bec3d07c8fd133485980de2?flag=sing-box?types=all"
+  local air_name="config"
+  local url="http://192.168.5.5:3001/m85fCbWh5YNXcTHMYQaH/api/file/singbox"
   local dir="${parent_dir}/confs"
   local file="${dir}/${air_name}.json"
   local tmp_file="${dir}/${air_name}.json.tmp"
   local log_file="${parent_dir}/log/run.log"
-  local json_expr=$(find "$dir" -maxdepth 1 -type f -name "*.json" ! -name "${air_name}.json" -printf "%f\n")
+  local json_expr=$(find "$dir" -maxdepth 1 -type f -name "${air_name}.json" -printf "%f\n")
 
   if [[ -z "$url" ]]; then
     log Warn "URL is empty, skipping download" >> "$log_file"
@@ -41,8 +41,8 @@ airport() {
 
   if find "${dir}" "${json_expr[*]}" | grep -q .; then
     [ -f "${dir}/packed.tar.gz" ] && rm -f "${dir}/packed.tar.gz"
-    find "${dir}" -maxdepth 1 -type f -name "*.json" ! -name "${air_name}.json" -exec tar -czf "${dir}/packed.tar.gz" --transform="s|.*/||" {} +
-    find "${dir}" -maxdepth 1 -type f -name "*.json" ! -name "${air_name}.json" -exec rm -f {} +
+    find "${dir}" -maxdepth 1 -type f -name "${air_name}.json" -exec tar -czf "${dir}/packed.tar.gz" --transform="s|.*/||" {} +
+    find "${dir}" -maxdepth 1 -type f -name "${air_name}.json" -exec rm -f {} +
   fi
 
   curl -fsSL -o "$tmp_file" "$url" || {
