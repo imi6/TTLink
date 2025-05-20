@@ -35,14 +35,14 @@ jobs:
           echo '{
             "version": "'"${version}"'",
             "versionCode": "'"${versionCode}"'",
-            "zipUrl": "https://github.com/t5188/${{ env.REPO_NAME }}/releases/download/'"${version}"'/TTLink-'${version}'.zip",
-            "changelog": "https://github.com/t5188/${{ env.REPO_NAME }}/raw/main/CHANGELOG.md"
+            "zipUrl": "https://github.com/imi6/${{ env.REPO_NAME }}/releases/download/'"${version}"'/TTLink-'${version}'.zip",
+            "changelog": "https://github.com/imi6/${{ env.REPO_NAME }}/raw/main/CHANGELOG.md"
           }' > update.json
 
       # Step 5: Commit and push update.json
       - name: Commit and push update.json
         run: |
-          git config --local user.name "t5188"
+          git config --local user.name "imi6"
           git config --local user.email "acstudycn@gmail.com"
           git add update.json
           git commit -m "Update update.json for version $(grep -oP 'version=\K[^ ]+' module.prop)" || true
@@ -51,12 +51,12 @@ jobs:
        # Step 6: Update module.prop file
       - name: Update module.prop
         run: |
-          sed -i "s|^updateJson=.*|updateJson=https://github.com/t5188/${{ env.REPO_NAME }}/raw/main/update.json|g" module.prop
+          sed -i "s|^updateJson=.*|updateJson=https://github.com/imi6/${{ env.REPO_NAME }}/raw/main/update.json|g" module.prop
 
       # Step 7: Commit and push module.prop
       - name: Commit and push module.prop
         run: |
-          git config --local user.name "t5188"
+          git config --local user.name "imi6"
           git config --local user.email "acstudycn@gmail.com"
           git add module.prop
           if git diff-index --quiet HEAD --; then
