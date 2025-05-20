@@ -1,196 +1,278 @@
 {
   "route": {
+    "default_domain_resolver": {
+      "server": "dns_local"
+    },
     "rules": [
       {
         "action": "sniff"
       },
       {
-        "protocol": "dns",
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 53
+          },
+          {
+            "protocol": "dns"
+          }
+        ],
         "action": "hijack-dns"
       },
       {
-        "domain_regex": [
-          "^.*mtalk[.]google[.]com$"
-        ],
+        "clash_mode": "Direct",
+        "action": "route",
         "outbound": "out-direct"
       },
       {
-        "domain_regex": [
-          "^.*[.]95516[.]com$"
-        ],
+        "ip_is_private": true,
+        "action": "route",
         "outbound": "out-direct"
-      },
-      {
-        "rule_set": "geosite-category-ads-all",
-        "action": "reject"
-      },
-      {
-        "clash_mode": "direct",
-        "outbound": "out-direct"
-      },
-      {
-        "clash_mode": "global",
-        "outbound": "TTLink"
-      },
-      {
-        "rule_set": "geosite-openai",
-        "outbound": "TTLink"
-      },
-      {
-        "domain_regex": [
-          "^.*[.]googleapis[.]cn$"
-        ],
-        "outbound": "TTLink"
-      },
-      {
-        "domain_regex": [
-          "^.*[.]googleapis[.]com$"
-        ],
-        "outbound": "TTLink"
-      },
-      {
-        "domain_regex": [
-          "^.*[.]xn--ngstr-lra8j[.]com$"
-        ],
-        "outbound": "TTLink"
       },
       {
         "rule_set": [
-          "geosite-google@cn",
-          "geosite-bing@cn",
-          "geosite-microsoft@cn"
+          "geosite-telegram",
+          "geoip-telegram"
         ],
-        "outbound": "TTLink"
+        "action": "route",
+        "outbound": "📲telegram"
       },
       {
-        "rule_set": "geosite-google",
-        "outbound": "TTLink"
-      },
-      {
-        "rule_set": "geosite-bing",
-        "outbound": "TTLink"
-      },
-      {
-        "rule_set": "geosite-microsoft",
-        "outbound": "TTLink"
-      },
-      {
-        "rule_set": "geosite-github",
-        "outbound": "TTLink"
-      },
-      {
-        "rule_set": "geosite-geolocation-!cn",
-        "outbound": "TTLink"
+        "rule_set": "geosite-openai",
+        "action": "route",
+        "outbound": "🤖AI"
       },
       {
         "rule_set": [
           "geosite-private",
-          "geosite-cn"
+          "geoip-private",
+          "geoip-cn",
+          "geosite-cn",
+          "cn-site",
+          "cn-ipv4",
+          "cn-ipv6",
+          "geosite-pt"
         ],
+        "action": "route",
         "outbound": "out-direct"
       },
       {
         "rule_set": [
-          "geoip-cn"
+          "geoip-facebook",
+          "geosite-facebook",
+          "geoip-google",
+          "geosite-google",
+          "geosite-youtube",
+          "geosite-twitter",
+          "geoip-twitter",
+          "geosite-netflix",
+          "geoip-netflix",
+          "geosite-microsoft",
+          "geosite-tumblr",
+          "geosite-geolocation-!cn",
+          "geosite-proxy"
         ],
-        "outbound": "out-direct"
+        "action": "route",
+        "outbound": "🚀代理"
       }
     ],
     "rule_set": [
       {
         "type": "remote",
-        "tag": "geosite-google",
-        "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/google.srs",
-        "download_detour": "out-direct"
+        "tag": "geosite-pt",
+        "format": "source",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/imi6/xiaoyuan/refs/heads/master/pt.json",
+        "download_detour": "🎁收集"
       },
       {
         "type": "remote",
-        "tag": "geosite-google@cn",
+        "tag": "geosite-proxy",
         "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/google@cn.srs",
-        "download_detour": "out-direct"
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo-lite/geosite/proxy.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-facebook",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/facebook.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-facebook",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/facebook.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-google",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/google.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-google",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-telegram",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/telegram.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-telegram",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/telegram.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-twitter",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/twitter.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-twitter",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/twitter.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-netflix",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/netflix.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-netflix",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/netflix.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-tumblr",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/tumblr.srs",
+        "download_detour": "🎁收集"
       },
       {
         "type": "remote",
         "tag": "geosite-geolocation-!cn",
         "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/geolocation-!cn.srs",
-        "download_detour": "out-direct"
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
+        "download_detour": "🎁收集"
       },
       {
         "type": "remote",
         "tag": "geosite-openai",
         "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/openai.srs",
-        "download_detour": "out-direct"
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
+        "download_detour": "🎁收集"
       },
       {
         "type": "remote",
         "tag": "geosite-microsoft",
         "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/microsoft.srs",
-        "download_detour": "out-direct"
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/microsoft.srs",
+        "download_detour": "🎁收集"
       },
       {
         "type": "remote",
-        "tag": "geosite-microsoft@cn",
+        "tag": "geoip-private",
         "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/microsoft@cn.srs",
-        "download_detour": "out-direct"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-category-ads-all",
-        "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/category-ads-all.srs",
-        "download_detour": "out-direct"
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/private.srs",
+        "download_detour": "🎁收集"
       },
       {
         "type": "remote",
         "tag": "geosite-private",
         "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/private.srs",
-        "download_detour": "out-direct"
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
+        "download_detour": "🎁收集"
       },
       {
         "type": "remote",
-        "tag": "geosite-bing",
+        "tag": "geosite-youtube",
         "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/bing.srs",
-        "download_detour": "out-direct"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-bing@cn",
-        "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/bing@cn.srs",
-        "download_detour": "out-direct"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-cn",
-        "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/cn.srs",
-        "download_detour": "out-direct"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-github",
-        "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geosite/github.srs",
-        "download_detour": "out-direct"
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/youtube.srs",
+        "download_detour": "🎁收集"
       },
       {
         "type": "remote",
         "tag": "geoip-cn",
         "format": "binary",
-        "url": "https://srs.acstudycn.eu.org/geoip/cn.srs",
-        "download_detour": "out-direct"
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-cn",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "cn-site",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/Dreista/sing-box-rule-set-cn/rule-set/accelerated-domains.china.conf.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "cn-ipv4",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/Dreista/sing-box-rule-set-cn/rule-set/maxmind-cn-ipv4.srs",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "cn-ipv6",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/Dreista/sing-box-rule-set-cn/rule-set/maxmind-cn-ipv6.srs",
+        "download_detour": "🎁收集"
       }
     ],
-    "final": "TTLink",
     "find_process": true,
-    "auto_detect_interface": true
+    "auto_detect_interface": true,
+    "final": "🐠漏网之鱼"
   }
 }
