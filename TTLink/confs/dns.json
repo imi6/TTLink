@@ -2,82 +2,76 @@
   "dns": {
     "servers": [
       {
-        "tag": "Cloudflare",
+        "tag": "dns_remote",
         "type": "https",
-        "server": "dns.acstudycn.eu.org",
-        "domain_resolver": "Alibaba"
+        "server": "8.8.8.8",
+        "detour": "🚀代理"
       },
       {
-        "tag": "Google",
+        "tag": "dns_local",
         "type": "https",
-        "server": "dns.google",
-        "domain_resolver": "Cloudflare",
-        "detour": "TTLink"
-      },
-      {
-        "tag": "Alibaba",
-        "type": "udp",
         "server": "223.5.5.5"
+      },
+      {
+        "tag": "dns_fakeip",
+        "type": "fakeip",
+        "inet4_range": "198.18.0.0/15",
+        "inet6_range": "fc00::/18"
       }
     ],
     "rules": [
       {
         "outbound": "any",
-        "server": "Alibaba"
+        "server": "dns_local"
       },
       {
-        "rule_set": "geosite-category-ads-all",
-        "action": "reject"
+        "clash_mode": "Direct",
+        "action": "route",
+        "server": "dns_local"
       },
       {
-        "clash_mode": "direct",
-        "server": "Cloudflare"
-      },
-      {
-        "clash_mode": "global",
-        "server": "Google"
-      },
-      {
-        "domain_regex": [
-          "^.*mtalk[.]google[.]com$",
-          "^.*[.]95516[.]com$"
-        ],
-        "server": "Alibaba"
-      },
-      {
-        "domain_regex": [
-          "^.*[.]googleapis[.]cn$",
-          "^.*[.]googleapis[.]com$",
-          "^.*[.]xn--ngstr-lra8j[.]com$"
-        ],
-        "server": "Google"
+        "clash_mode": "Global",
+        "action": "route",
+        "server": "dns_remote"
       },
       {
         "query_type": [
           "A",
           "AAAA"
         ],
-        "rule_set": [
-          "geosite-google",
-          "geosite-google@cn",
-          "geosite-bing",
-          "geosite-github",
-          "geosite-microsoft",
-          "geosite-bing@cn",
-          "geosite-microsoft@cn",
-          "geosite-openai",
-          "geosite-geolocation-!cn"
-        ],
-        "server": "Google"
+        "action": "route",
+        "server": "dns_fakeip",
+        "rewrite_ttl": 1
       },
       {
         "rule_set": [
           "geosite-private",
-          "geosite-cn"
+          "geosite-cn",
+          "cn-site",
+          "geosite-pt"
         ],
-        "server": "Cloudflare"
+        "server": "dns_local"
+      },
+      {
+        "rule_set": [
+          "geosite-facebook",
+          "geosite-google",
+          "geosite-telegram",
+          "geosite-youtube",
+          "geosite-twitter",
+          "geosite-netflix",
+          "geosite-tumblr",
+          "geosite-openai",
+          "geosite-microsoft",
+          "geosite-geolocation-!cn",
+          "geosite-proxy"
+        ],
+        "action": "route",
+        "server": "dns_fakeip"
       }
     ],
-    "independent_cache": true
+    "independent_cache": true,
+    "strategy": "prefer_ipv4",
+    "final": "dns_remote"
   }
 }
