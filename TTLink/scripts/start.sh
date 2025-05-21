@@ -8,6 +8,7 @@ module_dir="/data/adb/modules/TTLink"
 # source files
 source "${scripts_dir}/settings.ini"
 source "${scripts_dir}/TTLink.service"
+source "${scripts_dir}/airport.service"
 # Determines a path that can be used for relative path references.
 cd ${scripts_dir}
 
@@ -15,6 +16,7 @@ proxy_service() {
   if [[ ! -f "${module_dir}/disable" ]]; then
     log Info "Module Enabled"
     log Info "Start TTLink"
+    ${scripts_dir}/airport.service enable >/dev/null 2>&1
     ${scripts_dir}/TTLink.service enable >/dev/null 2>&1
   else
     log Warn "Module Disabled"
