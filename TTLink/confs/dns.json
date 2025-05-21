@@ -67,7 +67,6 @@
       }
     ],
     "independent_cache": true,
-    "strategy": "prefer_ipv4",
-    "final": "dns_remote"
+    "strategy": "prefer_ipv4"
   }
 }
