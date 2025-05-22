@@ -43,6 +43,13 @@
         "outbound": "🤖AI"
       },
       {
+        "rule_set": [
+          "geosite-freenom"
+        ],
+        "action": "route",
+        "outbound": "🚀网名大佬"
+      },
+      {
         "ip_is_private": true,
         "rule_set": [
           "geosite-private",
