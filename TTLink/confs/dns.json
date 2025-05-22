@@ -46,7 +46,8 @@
           "geosite-openai",
           "geosite-microsoft",
           "geosite-geolocation-!cn",
-          "geosite-proxy"
+          "geosite-proxy",
+          "geosite-talk"
         ],
         "action": "route",
         "server": "dns_fakeip"
