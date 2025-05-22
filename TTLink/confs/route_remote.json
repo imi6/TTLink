@@ -251,6 +251,14 @@
       },
       {
         "type": "remote",
+        "tag": "geosite-freenom",
+        "format": "source",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/imi6/sing-box-rule/refs/heads/main/freenom.json",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
         "tag": "geoip-cn",
         "format": "binary",
         "update_interval": "24h",
