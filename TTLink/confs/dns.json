@@ -35,10 +35,6 @@
           "A",
           "AAAA"
         ],
-        "action": "route",
-        "server": "dns_fakeip"
-      },
-      {
         "rule_set": [
           "geosite-facebook",
           "geosite-google",
