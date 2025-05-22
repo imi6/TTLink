@@ -61,6 +61,13 @@
           "geosite-pt"
         ],
         "server": "dns_local"
+      },
+      {
+        "rule_set": [
+          "geosite-AWAvenue-Ads",
+          "geosite-category-ads-all"
+        ],
+        "action": "reject"
       }
     ],
     "independent_cache": true,
