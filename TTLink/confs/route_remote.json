@@ -82,7 +82,7 @@
         "tag": "geosite-pt",
         "format": "source",
         "update_interval": "24h",
-        "url": "https://raw.githubusercontent.com/imi6/xiaoyuan/refs/heads/master/pt.json",
+        "url": "https://raw.githubusercontent.com/imi6/sing-box-rule/refs/heads/main/pt.json",
         "download_detour": "🎁收集"
       },
       {
@@ -232,17 +232,17 @@
       {
         "type": "remote",
         "tag": "geosite-talk",
-        "format": "binary",
+        "format": "source",
         "update_interval": "24h",
-        "url": "https://raw.githubusercontent.com/imi6/sing-box-rule/refs/heads/main/geoip-zytalk.json",
+        "url": "https://raw.githubusercontent.com/imi6/sing-box-rule/refs/heads/main/geosite-zytalk.json",
         "download_detour": "🎁收集"
       },
       {
         "type": "remote",
         "tag": "geoip-talk",
-        "format": "binary",
+        "format": "source",
         "update_interval": "24h",
-        "url": "https://raw.githubusercontent.com/imi6/sing-box-rule/refs/heads/main/geosite-zytalk.json",
+        "url": "https://raw.githubusercontent.com/imi6/sing-box-rule/refs/heads/main/geoip-zytalk.json",
         "download_detour": "🎁收集"
       },
       {
