@@ -36,17 +36,7 @@
           "AAAA"
         ],
         "action": "route",
-        "server": "dns_fakeip",
-        "rewrite_ttl": 1
-      },
-      {
-        "rule_set": [
-          "geosite-private",
-          "geosite-cn",
-          "cn-site",
-          "geosite-pt"
-        ],
-        "server": "dns_local"
+        "server": "dns_fakeip"
       },
       {
         "rule_set": [
@@ -64,6 +54,15 @@
         ],
         "action": "route",
         "server": "dns_fakeip"
+      },
+      {
+        "rule_set": [
+          "geosite-private",
+          "geosite-cn",
+          "cn-site",
+          "geosite-pt"
+        ],
+        "server": "dns_local"
       }
     ],
     "independent_cache": true,
