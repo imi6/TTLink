@@ -26,11 +26,6 @@
         "outbound": "out-direct"
       },
       {
-        "ip_is_private": true,
-        "action": "route",
-        "outbound": "out-direct"
-      },
-      {
         "rule_set": [
           "geosite-telegram",
           "geoip-telegram"
@@ -44,6 +39,7 @@
         "outbound": "🤖AI"
       },
       {
+        "ip_is_private": true,
         "rule_set": [
           "geosite-private",
           "geoip-private",
@@ -77,6 +73,9 @@
         "outbound": "🚀代理"
       }
     ],
+    "auto_detect_interface": true,
+    "find_process": true,
+    "final": "🐠漏网之鱼",
     "rule_set": [
       {
         "type": "remote",
@@ -270,9 +269,6 @@
         "url": "https://raw.githubusercontent.com/Dreista/sing-box-rule-set-cn/rule-set/maxmind-cn-ipv6.srs",
         "download_detour": "🎁收集"
       }
-    ],
-    "find_process": true,
-    "auto_detect_interface": true,
-    "final": "🐠漏网之鱼"
+    ]
   }
 }
