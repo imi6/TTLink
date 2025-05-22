@@ -34,7 +34,11 @@
         "outbound": "📲telegram"
       },
       {
-        "rule_set": "geosite-openai",
+        "rule_set": [
+          "geosite-openai",
+          "geosite-talk",
+          "geoip-talk"
+        ],
         "action": "route",
         "outbound": "🤖AI"
       },
