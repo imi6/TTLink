@@ -47,7 +47,8 @@
           "geosite-microsoft",
           "geosite-geolocation-!cn",
           "geosite-proxy",
-          "geosite-talk"
+          "geosite-talk",
+          "geosite-freenom"
         ],
         "action": "route",
         "server": "dns_fakeip"
