@@ -231,6 +231,22 @@
       },
       {
         "type": "remote",
+        "tag": "geosite-talk",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/imi6/sing-box-rule/refs/heads/main/geoip-zytalk.json",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-talk",
+        "format": "binary",
+        "update_interval": "24h",
+        "url": "https://raw.githubusercontent.com/imi6/sing-box-rule/refs/heads/main/geosite-zytalk.json",
+        "download_detour": "🎁收集"
+      },
+      {
+        "type": "remote",
         "tag": "geoip-cn",
         "format": "binary",
         "update_interval": "24h",
